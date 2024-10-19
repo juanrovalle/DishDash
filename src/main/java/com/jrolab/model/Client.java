@@ -1,25 +1,35 @@
-package com.jrolab.SpringReactor.model;
+package com.jrolab.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Document(collection = "dishes")
-public class Dish {
+@Document(collection = "clients")
+public class Client {
 
+    @Id
     @EqualsAndHashCode.Include
     private String id;
+
     @Field
-    private  String name;
+    private String firstName;
+
     @Field
-    private  Double price;
+    private String lastName;
+
     @Field
-    private  Boolean status;
+    private LocalDate birthDate;
+
+    @Field
+    private String urlPhoto;
 }

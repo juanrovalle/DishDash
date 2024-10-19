@@ -1,12 +1,12 @@
-package com.jrolab.SpringReactor.service.impl;
+package com.jrolab.service.impl;
 
+import com.jrolab.service.IClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import com.jrolab.SpringReactor.model.Client;
-import com.jrolab.SpringReactor.repo.IClientRepo;
-import com.jrolab.SpringReactor.repo.IGenericRepo;
-import com.jrolab.SpringReactor.service.IClientService;
+import com.jrolab.model.Client;
+import com.jrolab.repo.IClientRepo;
+import com.jrolab.repo.IGenericRepo;
 
 @Service
 @RequiredArgsConstructor

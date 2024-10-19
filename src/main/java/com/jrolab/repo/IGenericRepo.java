@@ -1,4 +1,4 @@
-package com.jrolab.SpringReactor.repo;
+package com.jrolab.repo;
 
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;

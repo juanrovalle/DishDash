@@ -1,6 +1,6 @@
-package com.jrolab.SpringReactor.service;
+package com.jrolab.service;
 
-import com.jrolab.SpringReactor.model.Dish;
+import com.jrolab.model.Dish;
 
 public interface IDishService extends ICRUD<Dish, String> {
 

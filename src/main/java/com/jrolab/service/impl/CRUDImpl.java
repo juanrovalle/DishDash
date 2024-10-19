@@ -1,8 +1,8 @@
 
 
-package com.jrolab.SpringReactor.service.impl;
-import com.jrolab.SpringReactor.repo.IGenericRepo;
-import com.jrolab.SpringReactor.service.ICRUD;
+package com.jrolab.service.impl;
+import com.jrolab.repo.IGenericRepo;
+import com.jrolab.service.ICRUD;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

@@ -1,13 +1,13 @@
 
-package com.jrolab.SpringReactor.service.impl;
+package com.jrolab.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import com.jrolab.SpringReactor.model.Dish;
-import com.jrolab.SpringReactor.repo.IDishRepo;
-import com.jrolab.SpringReactor.repo.IGenericRepo;
-import com.jrolab.SpringReactor.service.IDishService;
+import com.jrolab.model.Dish;
+import com.jrolab.repo.IDishRepo;
+import com.jrolab.repo.IGenericRepo;
+import com.jrolab.service.IDishService;
 
 @Service
 @RequiredArgsConstructor

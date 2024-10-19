@@ -1,4 +1,4 @@
-package com.jrolab.SpringReactor.service;
+package com.jrolab.service;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
