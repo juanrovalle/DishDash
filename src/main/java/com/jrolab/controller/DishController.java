@@ -1,13 +1,15 @@
-package com.jrolab.SpringReactor.controller;
+package com.jrolab.controller;
 
+import com.jrolab.dto.DishDTO;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.annotation.*;
 
-import com.jrolab.SpringReactor.model.Dish;
-import com.jrolab.SpringReactor.service.IDishService;
+import com.jrolab.model.Dish;
+import com.jrolab.service.IDishService;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -20,10 +22,10 @@ import java.net.URI;
 public class DishController {
 
     private final IDishService service;
-
+    private final ModelMapper modelMapper;
     @GetMapping
-    public Mono<ResponseEntity<Flux<Dish>>> findAll(){
-        Flux<Dish> fx = service.findAll();
+    public Mono<ResponseEntity<Flux<DishDTO>>> findAll(){
+        Flux<DishDTO> fx = service.findAll().map(e-> modelMapper.map(e, DishDTO.class));
 
         return Mono.just(ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -32,8 +34,9 @@ public class DishController {
     }
 
     @GetMapping("/{id}")
-    public Mono<ResponseEntity<Dish>> findById(@PathVariable("id") String id){
-        return service.findById(id) //Mono<Dish>
+    public Mono<ResponseEntity<DishDTO>> findById(@PathVariable("id") String id){
+        return service.findById(id).
+                map(e-> modelMapper.map(e, DishDTO.class))
                 .map(e -> ResponseEntity.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(e)
@@ -42,8 +45,9 @@ public class DishController {
     }
 
     @PostMapping
-    public Mono<ResponseEntity<Dish>> save(@RequestBody Dish dish, final ServerHttpRequest req){
+    public Mono<ResponseEntity<DishDTO>> save(@RequestBody Dish dish, final ServerHttpRequest req){
         return service.save(dish)
+                .map(e-> modelMapper.map(e, DishDTO.class))
                 .map(e -> ResponseEntity.created(
                         URI.create(req.getURI().toString().concat("/").concat(e.getId()))
                         )
@@ -54,13 +58,14 @@ public class DishController {
     }
 
     @PutMapping("/{id}")
-    public Mono<ResponseEntity<Dish>> update(@PathVariable("id") String id, @RequestBody Dish dish){
-        return Mono.just(dish)
+    public Mono<ResponseEntity<DishDTO>> update(@PathVariable("id") String id, @RequestBody Dish dishDTO){
+        return Mono.just(dishDTO)
                 .map(e -> {
                     e.setId(id);
                     return e;
                 })
-                .flatMap(e -> service.update(id, dish))
+                .flatMap(e -> service.update(id, modelMapper.map(dishDTO, Dish.class)))
+                .map(e-> modelMapper.map(e, DishDTO.class))
                 .map(e -> ResponseEntity.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(e)
